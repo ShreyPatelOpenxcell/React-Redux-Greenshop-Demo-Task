@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
@@ -39,7 +40,8 @@ const Header = () => {
                     <div className="row align-items-center">
                         <div className="col-lg-4 col-md-4">
                             <div className="logo-wrap">
-                                <a href="index.html"><img src="img/logo/logo.png" alt /></a>
+                                <Link className="nav-link" to="/" ><img src="img/logo/logo.png" alt="" /></Link>
+
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-8 text-center">
@@ -51,10 +53,10 @@ const Header = () => {
                         <div className="col-lg-4 col-md-4 col-4 text-right">
                             <div className="header-acc-wrap">
                                 <div className="header-acc-list header-wishlist">
-                                    <a href="wishlist.html"><span className><img src="img/icon/like.png" alt /></span><span className="item-count">3</span></a>
+                                    <span className><img src="img/icon/like.png" alt="" /></span><span className="item-count">3</span>
                                 </div>
                                 <div className="header-acc-list  header-cart">
-                                    <a href="cart.html"><span className><img src="img/icon/cart.png" alt /></span><span className="item-count">2</span></a>
+                                    <span className><img src="img/icon/cart.png" alt="" /></span><span className="item-count">2</span>
                                 </div>
                             </div>
                         </div>
@@ -71,39 +73,16 @@ const Header = () => {
                                 </div>
                                 <div className="categories-menu-toggle" style={{ "display": "none" }}>
                                     <ul>
-                                        <li><a href="#">Fresh Meat</a></li>
-                                        <li><a href="#">Butter &amp; Eggs</a></li>
-                                        <li><a href="#">Milk</a></li>
-                                        <li><a href="#">Oil &amp; Vinegars</a></li>
-                                        <li><a href="#">Bread</a></li>
-                                        <li><a href="#">Jam &amp; Honey</a></li>
-                                        <li><a href="#">Frozen Food</a></li>
+                                        <li><Link to="/">Fresh Meat</Link></li>
+                                        <li><Link to="/">Butter &amp; Eggs</Link></li>
+                                        <li><Link to="/">Milk</Link></li>
+                                        <li><Link to="/">Oil &amp; Vinegars</Link></li>
+                                        <li><Link to="/">Bread</Link></li>
+                                        <li><Link to="/">Jam &amp; Honey</Link></li>
+                                        <li><Link to="/">Frozen Food</Link></li>
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-lg-6 col-md-8 text-center">
-                            {/*main menu start*/}
-                            <div className="main-menu">
-                                <nav>
-                                    <ul>
-                                        <li><a className="active" href="index.html">Home</a></li>
-                                        <li><a className="active" href="index.html">Products<i className="fa fa-angle-down" /></a>
-                                            <ul className="sub-menu">
-                                                <li><a href="product.html">Product 1</a></li>
-                                                <li><a href="product-2.html">Product 2</a></li>
-                                                <li><a href="product-3.html">Product 3</a></li>
-                                                <li><a href="product-4.html">Product 4</a></li>
-                                                <li><a href="product-5.html">Product 5</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                            {/*main menu end*/}
                         </div>
                     </div>
                 </div>
