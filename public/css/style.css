@@ -987,7 +987,8 @@ a.nav-link.cat {
     overflow: hidden;
 }
 .single-blog.featured-blog .blog-thumb img {
-    width: 100%;
+    width: 300px;
+    height: 200px;
 }
 .single-blog.featured-blog .inline-btn {
     display: inline-block;
