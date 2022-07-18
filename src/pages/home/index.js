@@ -1,4 +1,5 @@
 import React from "react";
+import Blogs from "src/pages/blogs";
 
 const Home = () => {
     return (
@@ -603,33 +604,9 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            <section className="blog-area pd-t-150">
-                <div className="container">
-                    <header className="section-heading text-center">
-                        <h3 className="section-title">Latest Blogs</h3>
-                    </header>
-                    <div className="row">
-                        <div className="col-lg-3">
-                        </div>
-                        <div className="col-lg-6">
-                            <article className="single-blog featured-blog">
-                                <figure>
-                                    <div className="blog-thumb mb-4">
-                                        <img src="img/blog/featured-blog-1.png" alt />
-                                    </div>
-                                    <figcaption className="blog-content">
-                                        <h4 className="post-title mb-4">Lorem Ipsum is simply dummy text?</h4>
-                                        <p className="post-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing.</p>
-                                    </figcaption>
-                                </figure>
-                            </article>
-                        </div>
-                        <div className="col-lg-3">
-                        </div>
-                    </div>
-                </div>
-            </section>
+           
 
+           <Blogs></Blogs>
         </>
     );
 }

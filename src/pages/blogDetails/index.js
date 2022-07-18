@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 const Blogs = () => {
     const dispatch = useDispatch();
     const params = useParams();
-    const blog = useSelector(state => state.blogReducer.selectedBlog);
+    const blog = useSelector(state => state.blog.selectedBlog);
 
     useEffect(() => {
 

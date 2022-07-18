@@ -1,6 +1,110 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { baseURL } from "src/utils/commonConfig";
 
 const Category = () => {
+    const [Name, setName] = useState('');
+    const [isNameError, setNameErrorFlag] = useState(true);
+    const [Email, setEmail] = useState('');
+    const [isEmailError, setEmailErrorFlag] = useState(true);
+    const [Message, setMessage] = useState('');
+    const [isMessageError, setMessageErrorFlag] = useState(true);
+
+    const setType = (vType, vValue) => {
+        switch (vType) {
+            case 'name':
+                if (vValue) {
+                    const pattern = new RegExp(/^[a-zA-Z ]*$/);
+                    if (pattern.test(vValue)) {
+                        setName(vValue);
+                        setNameErrorFlag(false);
+                    }
+                    else {
+                        setName(vValue);
+                        setNameErrorFlag(true);
+                    }
+                }
+                else {
+                    setName(vValue);
+                    setNameErrorFlag(true);
+                }
+                break;
+            case 'email':
+                if (vValue) {
+                    const pattern = new RegExp(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
+                    if (pattern.test(vValue)) {
+                        setEmail(vValue);
+                        setEmailErrorFlag(false);
+                    }
+                    else {
+                        setEmail(vValue);
+                        setEmailErrorFlag(true);
+                    }
+                }
+                else {
+                    setEmail(vValue);
+                    setEmailErrorFlag(true);
+                }
+                break;
+            case 'message':
+                if (vValue) {
+                    setMessage(vValue);
+                    setMessageErrorFlag(false);
+                }
+                else {
+                    setMessage(vValue);
+                    setMessageErrorFlag(true);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    const submitContactDetails = async () => {
+        debugger
+        if (isNameError) {
+            toast.error("Please Enter Valid Name");
+            return;
+        }
+        else if (isEmailError) {
+            toast.error("Please Enter Valid Email");
+            return;
+        }
+        else if (isMessageError) {
+            toast.error("Please Enter Valid Message");
+            return;
+        }
+        else {
+            try {
+                await axios.post(baseURL + "contact-uses", { name: Name, message: Message, email: Email }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                toast.success("Message Sent Successfully");
+                resetValues();
+                return;
+
+            }
+            catch (error) {
+                toast.error("Error Occurred Submitting Your Message");
+                return;
+            }
+        }
+    }
+
+    const resetValues = () => {
+        setMessage('');
+        setName('');
+        setEmail('');
+        setMessageErrorFlag(true);
+        setEmailErrorFlag(true);
+        setNameErrorFlag(true);
+    }
+
     return (
         <>
             <div>
@@ -66,18 +170,18 @@ const Category = () => {
                                     <div className="row">
                                         <div className="col-lg-6 form-group">
                                             <label htmlFor="yourName">Your Name</label>
-                                            <input type="text" id="yourName" />
+                                            <input type="text" id="yourName" onChange={(e) => setType('name', e.target.value)} />
                                         </div>
                                         <div className="col-lg-6 form-group">
                                             <label htmlFor="yourEmail">Your Email</label>
-                                            <input type="text" id="yourEmail" />
+                                            <input type="text" id="yourEmail" onChange={(e) => setType('email', e.target.value)} />
                                         </div>
                                         <div className="col-lg-12 form-group">
                                             <label htmlFor="yourMessage">Your Message</label>
-                                            <textarea name id="yourMessage" defaultValue={""} />
+                                            <textarea name id="yourMessage" defaultValue={""} onChange={(e) => setType('message', e.target.value)} />
                                         </div>
                                         <div className="col-lg-12 text-center form-group">
-                                            <button type="submit" className="boxed-btn">Send</button>
+                                            <button type="button" onClick={() => submitContactDetails()} className="boxed-btn">Send</button>
                                         </div>
                                     </div>
                                 </form>

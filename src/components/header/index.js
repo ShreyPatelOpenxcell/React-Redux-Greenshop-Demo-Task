@@ -69,18 +69,7 @@ const Header = () => {
                         <div className="col-lg-3 col-md-4">
                             <div className="categories_menu">
                                 <div className="categories-title">
-                                    <h2 className="category-toggle">Shop by cattegory</h2>
-                                </div>
-                                <div className="categories-menu-toggle" style={{ "display": "none" }}>
-                                    <ul>
-                                        <li><Link to="/">Fresh Meat</Link></li>
-                                        <li><Link to="/">Butter &amp; Eggs</Link></li>
-                                        <li><Link to="/">Milk</Link></li>
-                                        <li><Link to="/">Oil &amp; Vinegars</Link></li>
-                                        <li><Link to="/">Bread</Link></li>
-                                        <li><Link to="/">Jam &amp; Honey</Link></li>
-                                        <li><Link to="/">Frozen Food</Link></li>
-                                    </ul>
+                                    <Link to="/products">Shop by category</Link>
                                 </div>
                             </div>
                         </div>

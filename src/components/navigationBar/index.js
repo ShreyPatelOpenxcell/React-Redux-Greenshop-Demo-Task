@@ -11,26 +11,13 @@ const NavBar = () => {
                 <div className="collapse navbar-collapse" id="main_nav">
                     <ul className="navbar-nav">
                         <li className="nav-item dropdown">
-                            <a className="nav-link cat" data-toggle="dropdown" href="#" aria-expanded="false"><strong>&nbsp; Shop By Category</strong></a>
-                            <div className="dropdown-menu">
-                                <a className="dropdown-item" href="#">Foods and Drink</a>
-                                <a className="dropdown-item" href="#">Fresh Meat</a>
-                                <a className="dropdown-item" href="#">Sea Fishes</a>
-                                <a className="dropdown-item" href="#">Butter &amp; Eggs</a>
-                                <a className="dropdown-item" href="#">Fruits</a>
-                                <a className="dropdown-item" href="#">Frozen Foods</a>
-                            </div>
+                            <Link className="nav-link cat" to="/products" ><strong>&nbsp; Shop By Category</strong></Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/" >Home</Link>
                         </li>
                         <li className="nav-item dropdown">
-                            <a className="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">Products<i className="fa fa-angle-down" /></a>
-                            <div className="dropdown-menu">
-                                <Link className="dropdown-item" to="/category" >Category</Link>
-                                <Link className="dropdown-item" to="/cart" >Cart</Link>
-                                <Link className="dropdown-item" to="/checkout" >Checkout</Link>
-                            </div>
+                            <Link className="nav-link" to="/products" >Products</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/blogs" >Blog</Link>

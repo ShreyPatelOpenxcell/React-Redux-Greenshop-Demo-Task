@@ -17,7 +17,7 @@ export const setBlogs = () => async (dispatch) => {
     catch (error) {
         dispatch({
             type: SET_BLOG_FAILED,
-            payload: error.message ? error.message : "Error occurred while fetching the data"
+            payload: error.message ? "Error : <" + error.message + ">  occurred while fetching the Blogs" : "Error occurred while fetching the Blogs"
         })
     }
 }
