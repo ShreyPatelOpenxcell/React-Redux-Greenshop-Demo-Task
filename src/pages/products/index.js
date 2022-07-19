@@ -21,9 +21,6 @@ const Products = () => {
         if (!productList.length) {
             dispatch(setProducts());
         }
-        return () => {
-            dispatch(removeSelectedProduct());
-        };
     }, [])
 
     const setType = (vType, vValue) => {
@@ -32,6 +29,7 @@ const Products = () => {
                 if (vValue) {
                     const pattern = new RegExp(/^[a-zA-Z ]*$/);
                     if (pattern.test(vValue)) {
+                        dispatch(filterProduct('Search Value', vValue, productList));
                         setSearchValue(vValue);
                         setSearchValueErrorFlag(false);
                     }
@@ -133,11 +131,11 @@ const Products = () => {
                                                                     <div className="img-wrap mb-3">
                                                                         <img src={item.image?.url} alt="productImage" />
                                                                         <span className="stc-hover">
-                                                                            <a href><i className="fa fa-shopping-cart" /></a>
+                                                                            <Link to={'/productDetails/' + item.id}><i className="fa fa-shopping-cart" /></Link>
                                                                         </span>
                                                                     </div>
                                                                     <figcaption className="info-wrap">
-                                                                        <Link to="" className="title mb-3">{item.title}</Link>
+                                                                        <Link to={'/productDetails/' + item.id} className="title mb-3">{item.title}</Link>
                                                                         <div className="price-wrap mt-2">
                                                                             <span className="price">₹ {item.SalePrice}</span>
                                                                             <del className="price-old">₹ {item.MRP}</del>

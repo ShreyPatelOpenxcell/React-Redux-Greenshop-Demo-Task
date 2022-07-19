@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+    const cart = useSelector(state => state.cart.cartList);
+
     return (
         <header className="header-area">
             <div className="header-top">
@@ -10,26 +13,6 @@ const Header = () => {
                         <div className="col-lg-6 col-md-6">
                             <div className="header-phone">
                                 <p><i className="fa fa-phone" /> Call us: <a href="tel:+01900220033">+01900220033</a></p>
-                            </div>
-                        </div>
-                        <div className="col-lg-6 col-md-6 text-center text-lg-right text-xl-right">
-                            <div className="language-currency">
-                                <ul>
-                                    <li className="currency"><a href="#"> Currency <i className="fa fa-caret-down" /></a>
-                                        <ul className="dropdown-currency">
-                                            <li><a href="#">€ Euro</a></li>
-                                            <li><a href="#">£ Pound Sterling</a></li>
-                                            <li><a href="#">$ US Dollar</a></li>
-                                        </ul>
-                                    </li>
-                                    <li className="language"><a href="#"> Language <i className="fa fa-caret-down" /></a>
-                                        <ul className="dropdown-language">
-                                            <li><a href="#">French</a></li>
-                                            <li><a href="#">Spanish</a></li>
-                                            <li><a href="#">Russian</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -52,11 +35,20 @@ const Header = () => {
                         </div>
                         <div className="col-lg-4 col-md-4 col-4 text-right">
                             <div className="header-acc-wrap">
-                                <div className="header-acc-list header-wishlist">
-                                    <span className><img src="img/icon/like.png" alt="" /></span><span className="item-count">3</span>
+                                <div className="header-acc-list  header-cart">
+                                    <Link to="/cart"><img src="img/icon/cart.png" alt="" /><span className="item-count">{cart.length}</span></Link>
                                 </div>
                                 <div className="header-acc-list  header-cart">
-                                    <span className><img src="img/icon/cart.png" alt="" /></span><span className="item-count">2</span>
+                                    <div className="language-currency">
+                                        <ul>
+                                            <li className="currency">Login <i className="fa fa-caret-down" />
+                                                <ul className="dropdown-currency">
+                                                    <li><Link to="/login">Login</Link></li>
+                                                    <li><Link to="/register">Register</Link></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -13,7 +13,6 @@ const Home = () => {
                                     <div className="hero-content">
                                         <h3>Organic Food</h3>
                                         <h2>Looking for <br />the fresh Organic Food</h2>
-                                        <a href className="boxed-btn">Shop Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +171,7 @@ const Home = () => {
                                                 </div>
                                             </figure>
                                         </div>
-                                    </div>                                
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -604,9 +603,9 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-           
 
-           <Blogs></Blogs>
+
+            <Blogs></Blogs>
         </>
     );
 }
