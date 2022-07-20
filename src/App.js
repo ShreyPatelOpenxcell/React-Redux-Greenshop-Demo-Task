@@ -30,7 +30,9 @@ const App = () => {
                   return (
                     <Route key={index} path={item.path} element={
                       <ProtectedRoute>
-                        <item.element />
+                        <Suspense fallback='...Loading'>
+                          <item.element />
+                        </Suspense>
                       </ProtectedRoute>
                     } />)
                 }

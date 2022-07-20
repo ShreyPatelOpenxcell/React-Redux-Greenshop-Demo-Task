@@ -8,8 +8,6 @@ import { addCartItem, removeCartItem } from "src/redux/reducers/cart/actions";
 
 const Cart = () => {
     const cartList = useSelector(state => state.cart.cartList);
-    const totalAmount = useState(0);
-    const [productQty, setProductQty] = useState(0);
     const dispatch = useDispatch();
 
     const setType = (vType, vValue, e) => {

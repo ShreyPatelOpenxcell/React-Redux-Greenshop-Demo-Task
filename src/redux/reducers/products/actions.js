@@ -1,4 +1,4 @@
-import { SET_PRODUCTS_FAILED, SELECTED_PRODUCT, REMOVE_SELECTED_PRODUCT, SET_PRODUCTS_REQUEST, SET_PRODUCTS_SUCCESS, FILTER_PRODUCT } from "./actionTypes";
+import { SET_PRODUCTS_FAILED, SELECTED_PRODUCT, REMOVE_SELECTED_PRODUCT, RESET_FILTER_LIST, SET_PRODUCTS_REQUEST, SET_PRODUCTS_SUCCESS, FILTER_PRODUCT } from "./actionTypes";
 import axios from "axios";
 import { baseURL } from "src/utils/commonConfig";
 
@@ -24,13 +24,13 @@ export const setProducts = () => async (dispatch) => {
 
 export const filterProduct = (vType, vValue, vInitialList) => async (dispatch) => {
     try {
-        if (vType === 'Search Value') {
+        if (vType === 'BySearchValue') {
             dispatch({
                 type: FILTER_PRODUCT,
                 payload: vInitialList.filter((item) => (item.title.toLowerCase().indexOf(vValue.toLowerCase()) !== -1))
             })
         }
-        else {
+        else if (vType === 'ByCategory') {
             if (vValue === 'All') {
                 try {
                     dispatch({ type: SET_PRODUCTS_REQUEST })
@@ -60,6 +60,42 @@ export const filterProduct = (vType, vValue, vInitialList) => async (dispatch) =
             }
 
         }
+        else if (vType === 'ByHomePage') {
+            switch (vValue) {
+                case 'All':
+                    dispatch({
+                        type: FILTER_PRODUCT,
+                        payload: vInitialList.slice(0, 8)
+                    })
+                    break;
+                case 'Featured':
+                    dispatch({
+                        type: FILTER_PRODUCT,
+                        payload: vInitialList.filter((item) => (item.IsFeatured === true))
+                    })
+                    break;
+                case 'New':
+                    dispatch({
+                        type: FILTER_PRODUCT,
+                        payload: vInitialList.slice(0, 4)
+                    })
+                    break;
+                case 'Onsell':
+                    dispatch({
+                        type: FILTER_PRODUCT,
+                        payload: vInitialList.slice(0, 4)
+                    })
+                    break;
+
+                default:
+                    dispatch({
+                        type: FILTER_PRODUCT,
+                        payload: vInitialList.slice(0, 8)
+                    })
+                    break;
+            }
+
+        }
     }
     catch (error) {
         dispatch({
@@ -73,6 +109,12 @@ export const selectedProduct = (productId) => {
     return {
         type: SELECTED_PRODUCT,
         payload: productId
+    }
+}
+
+export const resetFilterProducts = () => {
+    return {
+        type: RESET_FILTER_LIST
     }
 }
 

@@ -1,25 +1,38 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { setCategories } from "src/redux/reducers/categories/actions";
-import { removeSelectedProduct, setProducts, filterProduct } from "src/redux/reducers/products/actions";
+import { setProducts, filterProduct, resetFilterProducts } from "src/redux/reducers/products/actions";
 
 const Products = () => {
     const [searchValue, setSearchValue] = useState('');
+    const [categoryName, setcategoryName] = useState('');
     const [isSearchValueError, setSearchValueErrorFlag] = useState(false);
-    const productList = useSelector(state => state.product.products);
+    const productList = useSelector(state => state.product.filterList);
     const categoryList = useSelector(state => state.category.categories);
     const errorMessage = useSelector(state => state.product.errorMessage);
     const ErrorMessage = lazy(() => import("src/components/errorMessage"));
     const dispatch = useDispatch();
+    const params = useLocation().search;
+    const categoryNameFromSearchParam = new URLSearchParams(params).get('category');
 
     useEffect(() => {
-        if (!categoryList.length) {
-            dispatch(setCategories());
+
+        if (categoryNameFromSearchParam) {
+            setcategoryName(categoryNameFromSearchParam);
+            dispatch(filterProduct('ByCategory', categoryNameFromSearchParam, productList));
         }
-        if (!productList.length) {
-            dispatch(setProducts());
+        else {
+            if (!categoryList.length) {
+                dispatch(setCategories());
+            }
+            if (!productList.length) {
+                dispatch(setProducts());
+            }
+            else{
+                dispatch(resetFilterProducts());
+            }
         }
     }, [])
 
@@ -29,7 +42,7 @@ const Products = () => {
                 if (vValue) {
                     const pattern = new RegExp(/^[a-zA-Z ]*$/);
                     if (pattern.test(vValue)) {
-                        dispatch(filterProduct('Search Value', vValue, productList));
+                        dispatch(filterProduct('BySearchValue', vValue, productList));
                         setSearchValue(vValue);
                         setSearchValueErrorFlag(false);
                     }
@@ -45,9 +58,11 @@ const Products = () => {
                 break;
             case 'Category':
                 if (vValue) {
-                    dispatch(filterProduct('Category', vValue, productList));
+                    setcategoryName(vValue);
+                    dispatch(filterProduct('ByCategory', vValue, productList));
                 }
                 else {
+                    setcategoryName('');
                     toast.error("Please select Valid Category");
                 }
                 break;
@@ -62,7 +77,7 @@ const Products = () => {
             return;
         }
         else {
-            dispatch(filterProduct('Search Value', searchValue, productList));
+            dispatch(filterProduct('BySearchValue', searchValue, productList));
         }
     }
 
@@ -104,7 +119,7 @@ const Products = () => {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="col-lg-4 col-md-4 col-8 text-center">
-                                    <select className="form-control" onChange={(e) => setType('Category', e.target.value)} style={{ width: '150px' }}>
+                                    <select className="form-control" value={categoryName} onChange={(e) => setType('Category', e.target.value)} style={{ width: '150px' }}>
                                         <option value="All">All</option>
                                         {
                                             categoryList.map((item, index) => {
@@ -156,7 +171,7 @@ const Products = () => {
                                 <div className="col-lg-12">
                                     <div className="trendy-foods-filtering">
                                         <div className="row grid">
-                                            <span style={{ fontSize: '20px' }}>No Records Found</span>
+                                            <span style={{ fontSize: '20px' }}>No Products Found</span>
                                         </div>
                                     </div>
                                 </div>
