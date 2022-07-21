@@ -24,8 +24,7 @@ const ProductDetails = () => {
     }, [])
 
     const addItem = () => {
-        if(product.AvailableQuantity <= 0)
-        {
+        if (product.AvailableQuantity <= 0) {
             toast.error("Product is not Available");
             return;
         }
@@ -89,7 +88,7 @@ const ProductDetails = () => {
                                                     <h2>{product.title}</h2>
                                                     <h4>Vendor : <span style={{ color: '#49a010' }}>{product.vendor}</span></h4>
                                                     <h4>Availibility : <span style={{ color: '#49a010' }}>{product.AvailableQuantity}</span></h4>
-                                                    <h4>Category : <span style={{ color: '#49a010' }}>{product?.categories[0]?.name}</span></h4>
+                                                    <h4>Category : <span style={{ color: '#49a010' }}>{product?.categories && product?.categories[0]?.name}</span></h4>
                                                     <h4>MRP : ₹ <span style={{ color: '#49a010' }}>{product.MRP}</span></h4>
                                                     <h4>Sales Price : ₹ <span style={{ color: '#49a010' }}>{product.SalePrice}</span></h4>
                                                     <h4>Qty :   <select onChange={(e) => setType('Qty', e.target.value)} className={classes.qtyDropDown}>
