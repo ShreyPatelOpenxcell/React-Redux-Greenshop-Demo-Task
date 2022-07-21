@@ -140,7 +140,7 @@ const Home = () => {
                                 </div>
                                 <div className="row grid">
                                     {productList.length > 0 ?
-                                        productList.slice(0,8).map((item, index) => {
+                                        productList.slice(0, 8).map((item, index) => {
                                             return (
                                                 <div className="col-md-3 col-sm-6 grid-item">
                                                     <div className="single-food">
